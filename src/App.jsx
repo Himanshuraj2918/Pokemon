@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar />
-      <main className="container mx-auto px-8 pb-8 pt-32">
+      <main className="container mx-auto px-8 pb-8 pt-32 md:pt-8">
         <Pokemon />
       </main>
     </div>
