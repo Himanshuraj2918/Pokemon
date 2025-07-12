@@ -1,8 +1,6 @@
 import React from 'react';
 
 const Card = ({ pokemonData }) => {
-  console.log(pokemonData);
-  
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:p-20 sm:p-15">
       {pokemonData.map((currentData) => (
