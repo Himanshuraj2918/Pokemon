@@ -51,7 +51,7 @@ const Pokemon = () => {
   return (
     <>
       {isLoading ? (
-        <p className="text-center">Loading Pokémon...</p>
+        <p className="text-center mt-20">Loading Pokémon...</p>
       ) : (
         <>
           <Card pokemonData={pokemonData} />
