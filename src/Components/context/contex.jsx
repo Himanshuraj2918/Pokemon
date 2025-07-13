@@ -49,11 +49,15 @@ const PokemonProvider = ({ children }) => {
             setOffset(prev => prev - limit);
         }
     };
-
-
     useEffect(() => {
         const timerId = setTimeout(() => {
-            console.log(searchValue);
+            // console.log(pokemonData[0].name);
+            
+            const searchResult = pokemonData.find((pokemon)=> pokemon.name.toLowerCase() === searchValue.toLowerCase())
+            console.log([searchResult]);
+            
+            if(searchResult!=null)
+                setPokemonData([searchResult])
         },2000)
         return () => clearTimeout(timerId);
     }, [searchValue])
