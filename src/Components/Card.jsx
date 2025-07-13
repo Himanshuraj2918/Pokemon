@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useRef,useContext } from 'react';
 import { Download } from 'lucide-react';
-
-const Card = ({ pokemonData }) => {
+import { PokemonContext } from "./context/contex";
+const Card = () => {
   const cardRefs = useRef({});
-
+  const {pokemonData} = useContext(PokemonContext);
   const downloadCardAsImage = async (pokemonId, pokemonName) => {
     const cardElement = cardRefs.current[pokemonId];
     

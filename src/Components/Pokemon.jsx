@@ -1,53 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, {  useContext } from "react";
 import Card from './Card';
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { PokemonContext } from "./context/contex";
 
 const Pokemon = () => {
-  const [pokemonData, setPokemonData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [offset, setOffset] = useState(0);
-  const limit = 21;
-  const [page, setPage] = useState(0)
-
-  const FetchPokemon = async () => {
-    try {
-      setIsLoading(true);
-      const res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
-      const data = await res.json();
-
-      const detailData = await Promise.all(
-        data.results.map(async (currPokemon) => {
-          const response = await fetch(currPokemon.url);
-          return await response.json();
-        })
-      );
-
-      setPokemonData(detailData);
-      setIsLoading(false);
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    FetchPokemon();
-  }, [offset]);
-
-  const handleNext = () => {
-    const newPage = page + 1;
-    setPage(newPage);
-    setOffset(prev => prev + limit);
-  };
-
-  const handlePrev = () => {
-    const newPage = page - 1;
-    setPage(newPage);
-    if (offset > 0) {
-      setOffset(prev => prev - limit);
-    }
-  };
-
+  const {
+    isLoading,
+    pokemonData,
+    handlePrev,
+    offset,
+    page,
+    handleNext,
+    totalPages,
+    limit
+  } = useContext(PokemonContext)
   return (
     <>
       {isLoading ? (
@@ -67,7 +33,7 @@ const Pokemon = () => {
             </button>
 
             <span className="text-gray-700 font-semibold text-sm bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm">
-              Page {page + 1} of {Math.ceil(1302 / 21)}
+              Page {page + 1} of {totalPages}
             </span>
 
             <button
